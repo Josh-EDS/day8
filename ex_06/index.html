@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+  <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+  <title>Pet Information</title>
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f7f9fc;
+      text-align: center;
+      padding: 50px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <h1>{{ petName }}</h1>
+  <p>Multiplication Result: {{ number1 * number2 }}</p>
+  <p>Half of Number 1: {{ halfNumber1 }}</p>
+  <p>Number 2 raised to the power of 3: {{ pow3(number2) }}</p>
+  <p>Capitalized Sentence 1: {{ sentence1 | capitalize }}</p>
+  <p>Reversed Sentence 2: {{ sentence2 | reverse }}</p>
+  <p>Capitalized and Reversed Sentence 3: {{ sentence3 | capitalize | reverse }}</p>
+</div>
+
+<script src="ex_06.js"></script>
+</body>
+</html>
