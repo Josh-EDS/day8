@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1ere essai Sierpinski Carpet</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="carpet" class="carpet"></div>
+</body>
+
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.carpet {
+    width: 300px;
+    height: 300px;
+    background-color: blue;
+    position: relative;
+}
+
+.square {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    position: absolute;
+    cursor: pointer;
+}
+
+.white {
+    background-color: white;
+}
+</style>
+<script>
+    $(document).ready(function() {
+    function createSquare(x, y) {
+        const square = $('<div class="square"></div>').css({
+            left: x,
+            top: y,
+        }).appendTo('#carpet');
+
+        square.on('click', function() {
+            $(this).children().remove();
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (i !== 1 || j !== 1) {
+                        createSquare(x + j * 100, y + i * 100);
+                    }
+                }
+            }
+        });
+    }
+
+    createSquare(0, 0);
+});
+</script>
+</html>

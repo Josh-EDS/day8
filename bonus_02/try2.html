@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Page 3x3 Blue Squares</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            width: 100vw;
+            height: 100vh;
+        }
+        .square {
+            background-color: blue;
+            cursor: pointer;
+        }
+        .blank {
+            background-color: rgb(255, 255, 255);
+            cursor: pointer;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid" id="grid">
+        <div class="square" onclick="highlightNearestSquare(event)"></div>
+        <div class="square" onclick="highlightNearestSquare(event)"></div>
+        <div class="square" onclick="highlightNearestSquare(event)"></div>
+        <div class="square" onclick="highlightNearestSquare(event)"></div>
+        <div class="blank" onclick="highlightNearestSquare(event)"></div>
+        <div class="square" onclick="highlightNearestSquare(event)"></div>
+        <div class="square" onclick="highlightNearestSquare(event)"></div>
+        <div class="square" onclick="highlightNearestSquare(event)"></div>
+        <div class="square" onclick="highlightNearestSquare(event)"></div>
+    </div>
+
+    <script>
+        function highlightNearestSquare(event) {
+            const squares = document.querySelectorAll('.square, .blank');
+            const clickedX = event.clientX;
+            const clickedY = event.clientY;
+            let nearestSquare = null;
+            let nearestDistance = Infinity;
+
+            squares.forEach(square => {
+                const rect = square.getBoundingClientRect();
+                const squareX = rect.left + rect.width / 2;
+                const squareY = rect.top + rect.height / 2;
+
+                const distance = Math.sqrt(Math.pow(clickedX - squareX, 2) + Math.pow(clickedY - squareY, 2));
+
+                if (distance < nearestDistance) {
+                    nearestDistance = distance;
+                    nearestSquare = square;
+                }
+            });
+
+            if (nearestSquare) {
+                const iframe = document.createElement('iframe');
+                iframe.src = window.location.href;
+                nearestSquare.innerHTML = '';
+                nearestSquare.appendChild(iframe);
+
+                nearestSquare.onclick = (e) => {
+                    e.stopPropagation();
+                };
+            }
+        }
+    </script>
+</body>
+</html>
